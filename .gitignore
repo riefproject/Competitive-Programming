@@ -1,0 +1,9 @@
+/scraping/
+/.vscode/
+/temp/
+*.exe
+*.out
+*.txt
+*.sh
+snippet.cpp
+*temp.*
