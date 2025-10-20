@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int INF = 1e9;
-const int INF2 = 1e18;
-const int MOD = 1e9 + 7;
-const double PI = acos(-1.0);
-const double EPS = 1e-9;
-
 using ll = long long;
 using ld = long double;
 using ull = unsigned long long;
@@ -36,27 +30,34 @@ template<typename T, typename U> using umap = unordered_map<T, U>;
 #define feach(var, container) for (auto &var : container)
 #define debug(x) cerr << #x << " = " << (x) << endl;
 
+bool isConsonant(char c){
+    return c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u';
+}
 
 void solve(){
-    string s;
-        cin >> s;
-        string t = s;
-        reverse(all(t));
-        int n = sz(s);
-
-        vector<int> prev(n+1), cur(n+1);
-        for (int j = 0; j <= n; ++j) prev[j] = j;
+    string s; cin >> s;
+    
+    for(int i = 0; i < s.size(); ++i){
+        if(s[i] != 'c') continue;
         
-        for (int i = 1; i <= n; ++i) {
-            cur[0] = i; 
-            for (int j = 1; j <= n; ++j) 
-                if   (s[i-1] == t[j-1]) cur[j] = prev[j-1];
-                else cur[j] = 1 + min({ prev[j-1], prev[j], cur[j-1] });
-            swap(prev, cur);
+        if(s[i + 1] == 'a' || s[i + 1] == 'o' || s[i + 1] == 'u' || (isConsonant(s[i + 1]) && s[i + 1] != 'h' && s[i + 1] != 'y')){
+            s[i] = 'k';
+            continue;
         }
-        int d = prev[n];
-        int ans = (d + 1) / 2; 
-        cout << ans << '\n';
+
+        if(s[i + 1] == 'e' || s[i + 1] == 'i' || s[i + 1] == 'y'){
+            s[i] = 's';
+            continue;
+        }
+
+        if(s[i + 1] == 'h'){
+            s[i + 1] = '_';
+        }
+    }
+
+    string ans;
+    for(int i = 0; i < s.size(); ++i) if(s[i] != '_') ans.pb(s[i]);
+    cout << ans << endl;
 }
 
 int main(){

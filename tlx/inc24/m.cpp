@@ -38,56 +38,12 @@ template<typename T, typename U> using umap = unordered_map<T, U>;
 
 
 void solve(){
-    int n, m, k;
-    if(!(cin >> n >> m >> k)) return;
+    int n; cin >> n;
+    vector<ushort> a(3*n);
+    feach(x, a) cin >> x;
+    sort(all(a));
 
-    vector<pr<int, int>> slabstones(k);
-    for (int i = 0; i < k; ++i) {
-        cin >> slabstones[i].fi >> slabstones[i].se;
-    }
-
-    int u1, v1, u2, v2;
-    cin >> u1 >> v1 >> u2 >> v2;
-
-    auto didalem = [&](int r, int c) {
-        return r >= u1 && r <= u2 && c >= v1 && c <= v2;
-    };
-
-    auto check = [&](int maxi) {
-        int geser = 0;
-        int bener = 0;
-
-        for (int i = 0; i < k; ++i) {
-            if (didalem(slabstones[i].fi, slabstones[i].se)) {
-                if (i + 1 > maxi) {
-                    return false; 
-                }
-                geser++;
-            } else {
-            if (i + 1 > maxi) {
-                    bener++;
-                }
-            }
-        }
-
-        ll areadev = (ll)(u2 - u1 + 1) * (v2 - v1 + 1);
-        ll areaout = (ll)n * m - areadev;
-        ll areakos = areaout - bener;
-
-        return geser <= areakos;
-    };
-
-    int l = 0, h = k, ans = -1;
-    while(l <= h){
-        int mid = l + (h - l) / 2;
-        if(check(mid)){
-            ans = mid;
-            h = mid - 1;
-        } else {
-            l = mid + 1;
-        }
-    }
-    cout << ans << endl;
+    cout << a[n];
 }
 
 int main(){
