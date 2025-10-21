@@ -10,3 +10,4 @@ snippet.cpp
 !*.*
 !**/
 /.vscode/**/*
+/tests/

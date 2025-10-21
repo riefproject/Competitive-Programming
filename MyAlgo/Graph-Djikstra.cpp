@@ -1,21 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int INF = 1e9;
-const int INF2 = 1e18;
-const int MOD = 1e9 + 7;
-const double PI = acos(-1.0);
-const double EPS = 1e-9;
-
 using ll = long long;
 using ld = long double;
+using lll = __int128;
 using ull = unsigned long long;
 using uint = unsigned int;
 using ushort = unsigned short;
 template<typename T> using vec2D = vector<vector<T>>;
-template<typename T> using heap = priority_queue<T>;
 template<typename T, typename U> using pr = pair<T, U>;
-template<typename T, typename U> using umap = unordered_map<T, U>;
+template<typename T> using min_heap = priority_queue<T, vector<T>, greater<T>>;
+template<typename T> using max_heap = priority_queue<T, vector<T>, less<T>>;
 
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
@@ -37,30 +32,33 @@ template<typename T, typename U> using umap = unordered_map<T, U>;
 #define feach(var, container) for (auto &var : container)
 #define debug(x) cerr << #x << " = " << (x) << endl;
 
+const int INF = 1e9;
+const ll INF2 = 1e18;
+const int MOD = 1e9 + 7;
+const double PI = acos(-1.0);
+const double EPS = 1e-9;
 
-void djikstra(int start, const vec2D<pr<int, int>>& graph, vector<int>& dist) {
-    int n = sz(graph);
-    dist.assign(n, INF);
-    dist[start] = 0;
-    priority_queue<pr<int, int>, vector<pr<int, int>>, greater<pr<int, int>>> pq;
-    pq.push({0, start});
-
-    while (!pq.empty()) {
-        auto [d, u] = pq.top();
-        pq.pop();
-        if (d > dist[u]) continue;
-
-        for (auto &[v, w] : graph[u]) {
-            if (dist[u] + w < dist[v]) {
-                dist[v] = dist[u] + w;
+auto djikstra(int src, vec2D<pr<int,int>>& adj) {
+    vector<int> dist(sz(adj), INF);
+    min_heap<pr<int,int>> pq;
+    dist[src] = 0;
+    pq.push({0, src});
+    while(!pq.empty()){
+        auto [d, u] = pq.top(); pq.pop();
+        if(d != dist[u]) continue;
+        for(auto [v, w] : adj[u]){
+            if(dist[v] > d + w){
+                dist[v] = d + w;
                 pq.push({dist[v], v});
             }
         }
     }
+    return dist;
 }
 
-int solve(){
 
+void solve(){
+    // code here
 }
 
 int main(){

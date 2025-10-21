@@ -10,7 +10,9 @@ const double EPS = 1e-9;
 using ll = long long;
 using ld = long double;
 using ull = unsigned long long;
+using lll = __int128;
 using uint = unsigned int;
+using sshort = int8_t;
 using ushort = unsigned short;
 template<typename T> using vec2D = vector<vector<T>>;
 template<typename T, typename U> using pr = pair<T, U>;
@@ -38,6 +40,8 @@ template<typename T, typename U> using umap = unordered_map<T, U>;
 
 
 int solve(){
+    // Snippet for modpow
+    
     
 }
 

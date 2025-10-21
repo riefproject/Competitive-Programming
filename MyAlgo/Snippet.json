@@ -1,4 +1,3 @@
-
 {
 	"rief's Template for Competitive Programming": {
 		"prefix": "cp",
@@ -6,20 +5,16 @@
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"",
-			"const int INF = 1e9;",
-			"const int INF2 = 1e18;",
-			"const int MOD = 1e9 + 7;",
-			"const double PI = acos(-1.0);",
-			"const double EPS = 1e-9;",
-			"",
 			"using ll = long long;",
 			"using ld = long double;",
+			"using lll = __int128;",
 			"using ull = unsigned long long;",
 			"using uint = unsigned int;",
 			"using ushort = unsigned short;",
 			"template<typename T> using vec2D = vector<vector<T>>;",
 			"template<typename T, typename U> using pr = pair<T, U>;",
-			"template<typename T, typename U> using umap = unordered_map<T, U>;",
+			"template<typename T> using min_heap = priority_queue<T, vector<T>, greater<T>>;",
+			"template<typename T> using max_heap = priority_queue<T, vector<T>, less<T>>;",
 			"",
 			"#define all(v) (v).begin(), (v).end()",
 			"#define rall(v) (v).rbegin(), (v).rend()",
@@ -41,8 +36,14 @@
 			"#define feach(var, container) for (auto &var : container)",
 			"#define debug(x) cerr << #x << \" = \" << (x) << endl;",
 			"",
+			"const int INF = 1e9;",
+			"const ll INF2 = 1e18;",
+			"const int MOD = 1e9 + 7;",
+			"const double PI = acos(-1.0);",
+			"const double EPS = 1e-9;",
 			"",
-			"int solve(){",
+			"",
+			"void solve(){",
 			"\t${1:// code here}",
 			"}",
 			"",
@@ -59,5 +60,101 @@
 			"}"
 		],
 		"description": "Template for Competitive Programming"
+	},
+
+	"Modular Exponentiation Snippet": {
+		"prefix": "modpow",
+		"body": [
+			"auto modpow = [](ll base, ll exp, ll mod) {",
+			"\tll result = 1;",
+			"\tbase %= mod;",
+			"\twhile (exp > 0) {",
+			"\t\tif (exp & 1) result = (result * base) % mod;",
+			"\t\tbase = (base * base) % mod;",
+			"\t\texp >>= 1;",
+			"\t}",
+			"\treturn result;",
+			"};"
+		],
+		"description": "Function to perform modular exponentiation"
+	},
+
+	"Sieve of Eratosthenes Snippet Function": {
+		"prefix": "sieve",
+		"body": [
+			"vector<bool> isprime;",
+			"void sieve(int n) {",
+			"\tisprime.assign(n + 1, true);",
+			"\tisprime[0] = isprime[1] = false;",
+			"\tfor (int i = 2; i * i <= n; i++) {",
+			"\t\tif (isprime[i]) {",
+			"\t\t\tfor (int j = i * i; j <= n; j += i) {",
+			"\t\t\t\tisprime[j] = false;",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"}"
+		],
+		"description": "Function to generate a list of prime numbers up to n using the Sieve of Eratosthenes"
+	},
+
+	"Djikstra Algorithm" : {
+		"prefix": "djikstra",
+		"body": [
+			"auto djikstra(int src, vec2D<pr<int,int>>& adj) {",
+			"\tvector<int> dist(sz(adj), INF);",
+			"\tmin_heap<pr<int,int>> pq;",
+			"\tdist[src] = 0;",
+			"\tpq.push({0, src});",
+			"\twhile(!pq.empty()){",
+			"\t\tauto [d, u] = pq.top(); pq.pop();",
+			"\t\tif(d != dist[u]) continue;",
+			"\t\tfor(auto [v, w] : adj[u]){",
+			"\t\t\tif(dist[v] > d + w){",
+			"\t\t\t\tdist[v] = d + w;",
+			"\t\t\t\tpq.push({dist[v], v});",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"\treturn dist;",
+			"}"
+		]
+	},
+
+	"Breadth First Search (BFS) Algorithm": {
+		"prefix": "bfs",
+		"body": [
+			"auto bfs(int src, vec2D<int>& adj) {",
+			"\tvector<int> dist(sz(adj), -1);",
+			"\tqueue<int> q;",
+			"\tdist[src] = 0;",
+			"\tq.push(src);",
+			"\twhile(!q.empty()){",
+			"\t\tint u = q.front(); q.pop();",
+			"\t\tfor(auto v : adj[u]){",
+			"\t\t\tif(dist[v] == -1){",
+			"\t\t\t\tdist[v] = dist[u] + 1;",
+			"\t\t\t\tq.push(v);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"\treturn dist;",
+			"}"
+		]
+	},
+
+	"Depth First Search (DFS) Algorithm": {
+		"prefix": "dfs",
+		"body": [
+			"void dfs(int u, vec2D<int>& adj, vector<bool>& visited) {",
+			"\tvisited[u] = true;",
+			"\tfor(auto v : adj[u]){",
+			"\t\tif(!visited[v]){",
+			"\t\t\tdfs(v, adj, visited);",
+			"\t\t}",
+			"\t}",
+			"}"
+		]
 	}
+	
 }
