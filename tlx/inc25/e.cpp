@@ -64,10 +64,10 @@ void bld(int idx, int st, int ed) {
         return;
     }
 
-    int mid = (st + ed) / 2;
+    int mid = (st + ed) >> 2;
     bld(2 * idx, st, mid);
     bld(2 * idx + 1, mid + 1, ed);
-    tree[idx] = mrg(tree[2 * idx], tree[2 * idx + 1]);
+    tree[idx] = mrg(tree[idx << 2], tree[2 << idx | 1]);
 }
 
 void upd(int idx, int st, int ed, int tid, char op, int k) {
